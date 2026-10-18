@@ -52,6 +52,6 @@ not a live model diagnosis.
   or administrative cleanup; no background retention policy is implemented.
 - All remediation is deterministic simulation. No production service is contacted.
 
-Verification: 60 real-database tests across the whole project, including 14
-Proof Lab cases, plus TypeScript production build and five architecture scenarios
+Verification: 60 tests across the whole project, using real FalkorDB and
+explicitly mocked provider contracts, including 14 Proof Lab cases, plus TypeScript production build and five architecture scenarios
 with two graph-context ablations. Live provider validation remains outstanding.

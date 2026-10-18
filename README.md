@@ -36,6 +36,8 @@ the same verified workflow and executor as Incident command. The suite now has
 **60 passing tests** against real FalkorDB, including API race and isolation checks.
 See the [two-minute judge walkthrough](docs/PROOF_LAB.md).
 
+![Actual Proof Lab rejection and retained memory](docs/assets/proof-lab.png)
+
 ## The experiment that makes the graph matter
 
 Open **System map → Run context ablation**. RecallOps copies the current factual

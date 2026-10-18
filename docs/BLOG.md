@@ -59,3 +59,22 @@ not estimates of a hackathon score.
 [Source and setup](https://github.com/gowtham66867/recallops-graphhacks) ·
 [Architecture](ARCHITECTURE.md) · [Measured evidence](VERIFICATION.md)
 
+
+
+## Let the judge challenge the evidence
+
+The final upgrade adds a browser-scoped Proof Lab. A judge can choose a failure
+signature, schema, feature flag, and pool state, then inspect how policy changes.
+The strongest demonstration is a stale approval: approve a verified remedy,
+inject schema drift, and ask the actual executor to act. It returns HTTP 409,
+invalidates the proposal, and leaves incident errors unchanged.
+
+A second experiment makes memory conditionality visible. Record a successful
+remedy, reintroduce its fault, and see the saved lesson become eligible. Change
+the schema and the observation stays while eligibility disappears. Matching a
+lesson also does not authorize further action after recovery. These are the same
+workflow and engine used by Incident command, with separate lab graph state.
+
+[Try the two-minute challenge](PROOF_LAB.md). The hosted HTTPS checks and 60-test
+suite cover these behaviors. All faults and remediation remain synthetic, and
+browser scoping is not authenticated tenant isolation.

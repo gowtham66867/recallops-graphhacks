@@ -1,0 +1,12 @@
+{
+  "url": "https://34.46.171.202.sslip.io",
+  "verified_at": "2026-10-18T12:59:00.887531+00:00",
+  "workflow": "passed",
+  "observed_recovery": 0.2,
+  "lesson_eligible_on_recurrence": true,
+  "stale_execution_http": 409,
+  "proposal": "invalidated",
+  "errors_unchanged_after_rejection": 18.4,
+  "lesson_rejected_after_schema_drift": true,
+  "main_scenario_preserved": true
+}

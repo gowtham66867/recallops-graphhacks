@@ -67,3 +67,18 @@ AI coding and writing assistance are disclosed in the submitted description.
 The portal says the team may edit until the deadline: October 18, 2026,
 11:59 PM IST. The signed-in submission page is
 https://www.wemakedevs.org/hackathons/falkordb/submit .
+
+
+## Verified upgrade before the deadline
+
+On October 18 at **6:30 PM IST**, the portal again showed **Submitted** after
+saving the Proof Lab description and updated 60-test verification count. Both
+tracks, the original captioned YouTube demo, judge login, and repository links
+were retained. The entry now links judges to the interactive lab and its
+walkthrough. No withdrawal or new submission was needed.
+
+Release: https://github.com/gowtham66867/recallops-graphhacks/releases/tag/v1.1.0
+
+External HTTPS checks verified observed recovery, conditional memory reuse,
+HTTP 409 on stale approved context, retained but ineligible lessons after schema
+drift, and preservation of the main scenario. See proof-lab-verification.json.
