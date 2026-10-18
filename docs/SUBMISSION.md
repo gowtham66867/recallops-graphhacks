@@ -1,4 +1,4 @@
-# Submission draft
+# Submission record
 
 ## Name
 RecallOps — Incident memory that knows when a fix expires
@@ -41,18 +41,29 @@ AI coding assistance was used for design, implementation, testing, and documenta
 - Reproducible verification: 46 tests, five scenario cases, two history ablations; CI passed.
 - Tracks: Agent Memory and Coordination; Agents That Act on Connected Data.
 
-## Remaining publication steps
+## Submitted
 
-The signed-in WeMakeDevs form has the project description, tracks, repository,
-deployment, FalkorDB contribution, build-story link, and sponsor feedback filled.
-The required YouTube URL is still empty. The 4:07 prepared video is rendered and
-published as a GitHub release asset. YouTube publication awaits the user's
-at-action approval of the Terms of Service shown in its upload dialog. Sharing
-the demo-only login in the submission also awaits the user's choice.
+The signed-in WeMakeDevs portal confirmed **Submitted** for
+**GraphHacksChampions** (team code `975BKB`), filed October 18, 2026, at
+**5:36 PM IST**. Both selected tracks are recorded:
+
+- Agents That Act on Connected Data
+- Agent Memory and Coordination
+
+The submission includes the public repository, graph schema and exact Cypher
+queries, the build-story article, the protected live deployment, and the
+approved demo-only login for judges. The login is not published in this source
+repository.
+
+YouTube demo: https://youtu.be/UNLjAmICQVE — **Unlisted**, with English captions.
+It uses actual UI captures and synthetic narration. YouTube's upload checks
+reported no issues. The local confirmation screenshot and metadata are saved in
+ignored `artifacts/` files.
 
 The available OpenAI project still returns `credit_balance_exhausted`. The entry
 explicitly discloses deterministic mode and does not claim a verified live model.
+AI coding and writing assistance are disclosed in the submitted description.
 
-The deadline checked on the official rules page is October 18, 2026, 11:59 PM IST.
-This document records preparation, not a completed submission. No YouTube URL or
-submission confirmation has been fabricated.
+The portal says the team may edit until the deadline: October 18, 2026,
+11:59 PM IST. The signed-in submission page is
+https://www.wemakedevs.org/hackathons/falkordb/submit .

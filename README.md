@@ -8,7 +8,7 @@ RecallOps is an incident command center for Graph Hacks 2026. FalkorDB holds ser
 
 **Tracks:** Agent Memory and Coordination; Agents That Act on Connected Data.
 
-[Watch/download the 4:07 recorded demo](https://github.com/gowtham66867/recallops-graphhacks/releases/tag/v1.0.0) · [Protected live app](https://34.46.171.202.sslip.io)
+[Watch the demo on YouTube](https://youtu.be/UNLjAmICQVE) · [Video and captions download](https://github.com/gowtham66867/recallops-graphhacks/releases/tag/v1.0.0) · [Protected live app](https://34.46.171.202.sslip.io)
 
 The video uses actual app captures with synthetic narration. It demonstrates
 **deterministic investigation**, not a validated live-model run. Captions and the
@@ -131,7 +131,7 @@ The agent reads `Incident → Service ← Historical incident → Attempt → Ou
 - Unknown evidence does not establish safety. A prior success is reused only when current preconditions pass and the recorded signature and schema match.
 - The graph visualization shows a bounded operational/historical subgraph; full original source text is available through source chips. The error meter is calculated from actual simulator state and uses a labeled 0–25% display scale.
 - Typography uses Google Fonts when online, with system fallbacks offline.
-- A password-protected Google Cloud demo is deployed; see [deployment instructions](docs/DEPLOYMENT.md). Repository publication, a recorded demo video, and hackathon submission are separate remaining steps.
+- A password-protected Google Cloud demo is deployed; see [deployment instructions](docs/DEPLOYMENT.md). The public source and captioned demo were submitted to Graph Hacks on October 18, 2026; see [submission record](docs/SUBMISSION.md).
 
 ## Project map
 

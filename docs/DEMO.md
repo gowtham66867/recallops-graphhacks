@@ -1,5 +1,7 @@
 # Recorded demo walkthrough
 
+Published as Unlisted: https://youtu.be/UNLjAmICQVE (English captions included).
+
 The prepared video is 4 minutes 7 seconds, 1920×1080 H.264 with AAC audio.
 It is an edited walkthrough of actual browser interactions, narrated with
 synthetic speech. It demonstrates deterministic investigation; it does not

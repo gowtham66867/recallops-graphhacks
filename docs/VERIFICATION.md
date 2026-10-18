@@ -41,7 +41,7 @@ Narrow layout inspection verified top navigation, scenario selector, stacked lay
 
 - A real provider request was attempted and returned HTTP 429 `credit_balance_exhausted`. No successful live investigation or same-model historical-context comparison has been recorded. The mocked adapter contract test is not a live model evaluation.
 - One dependency deprecation warning from Starlette's test client/AnyIO was emitted; it did not fail tests.
-- A password-protected Google Cloud deployment passed external HTTPS and workflow checks; see DEPLOYMENT.md. The source repository and build-story article are public, and the narrated demo video has been rendered. YouTube publication and hackathon submission are pending; this record does not claim they have completed.
+- A password-protected Google Cloud deployment passed external HTTPS and workflow checks; see DEPLOYMENT.md. The source repository and build-story article are public, and the narrated demo video has been rendered. YouTube publication and hackathon submission subsequently completed; see SUBMISSION.md for the observed portal confirmation.
 - The hosted demo uses shared access credentials. It has no per-user authorization, tenant isolation, external telemetry, or real remediation integration.
 
 
@@ -76,3 +76,7 @@ the source snapshot before and after the experiment was identical.
 The prepared recorded walkthrough uses actual UI captures and synthetic
 narration. It explicitly discloses deterministic mode and the unverified optional
 live-model path. See DEMO.md for its exact chaptered transcript.
+
+## Submission confirmation
+
+WeMakeDevs showed Submitted for GraphHacksChampions, filed October 18, 2026, at 5:36 PM IST. The entry includes both relevant tracks, public source, the Unlisted YouTube demo with English captions, build-story article, and hosted demo access. See SUBMISSION.md.
