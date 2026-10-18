@@ -1,0 +1,82 @@
+{
+  "measured_at": "2026-10-18T09:53:30.410740+00:00",
+  "database": "real FalkorDB v4.16.3",
+  "mode": "deterministic architecture and graph-context ablation",
+  "cases": [
+    {
+      "scenario": "checkout",
+      "verification": "passed",
+      "source_records_checked": 4,
+      "checkpoint_count": 5,
+      "specialists": 3,
+      "counterfactuals_non_mutating": true,
+      "all_forecasts_labelled_predictions": true,
+      "recommendation": "disable_flag"
+    },
+    {
+      "scenario": "rollback-valid",
+      "verification": "passed",
+      "source_records_checked": 3,
+      "checkpoint_count": 5,
+      "specialists": 3,
+      "counterfactuals_non_mutating": true,
+      "all_forecasts_labelled_predictions": true,
+      "recommendation": "rollback"
+    },
+    {
+      "scenario": "unknown",
+      "verification": "passed",
+      "source_records_checked": 3,
+      "checkpoint_count": 5,
+      "specialists": 3,
+      "counterfactuals_non_mutating": true,
+      "all_forecasts_labelled_predictions": true,
+      "recommendation": null
+    },
+    {
+      "scenario": "pool",
+      "verification": "passed",
+      "source_records_checked": 3,
+      "checkpoint_count": 5,
+      "specialists": 3,
+      "counterfactuals_non_mutating": true,
+      "all_forecasts_labelled_predictions": true,
+      "recommendation": "scale_pool"
+    },
+    {
+      "scenario": "dependency",
+      "verification": "passed",
+      "source_records_checked": 4,
+      "checkpoint_count": 5,
+      "specialists": 3,
+      "counterfactuals_non_mutating": true,
+      "all_forecasts_labelled_predictions": true,
+      "recommendation": "disable_flag"
+    }
+  ],
+  "memory_ablations": [
+    {
+      "scenario": "checkout",
+      "action": "restart",
+      "with_graph_history": "contradicted",
+      "without_history_edges": "unknown",
+      "changed": true,
+      "scope": "Only traversable historical context removed; current deployment evidence preserved."
+    },
+    {
+      "scenario": "rollback-valid",
+      "action": "rollback",
+      "with_graph_history": "supported",
+      "without_history_edges": "unknown",
+      "changed": true,
+      "scope": "Only traversable historical context removed; current deployment evidence preserved."
+    }
+  ],
+  "live_model_evaluation": "A real provider request returned credit_balance_exhausted; no successful live model evaluation. Mocked contracts are not live validation.",
+  "limitations": [
+    "Synthetic observations include preassigned failure signatures.",
+    "The simulator is an explicit transition model, not a production environment.",
+    "These results do not establish general incident accuracy or superiority to another database.",
+    "Ablation changes available context; it is not a same-model performance comparison."
+  ]
+}

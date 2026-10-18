@@ -1,0 +1,9 @@
+import {useEffect,useState} from 'react';
+import {ArrowRight,Clock3,RotateCcw} from 'lucide-react';
+import {api} from './api';
+type SavedRun={id:string;status:string;phase:string;updated_at:string;resume_count:number;live:boolean};
+export default function WorkflowHistory({scenario,runId,busy,onResume}:{scenario:string;runId?:string;busy:boolean;onResume:(id:string)=>void}){
+ const[runs,setRuns]=useState<SavedRun[]>([]);const[error,setError]=useState('');
+ useEffect(()=>{let active=true;api<SavedRun[]>(`/${scenario}/runs`).then(r=>{if(active){setRuns(r);setError('')}}).catch(()=>{if(active)setError('Saved investigations could not be loaded. Retry the investigation to reconnect.')});return()=>{active=false}},[scenario,runId,busy]);
+ return <details className="panel saved-runs"><summary><span><Clock3 size={13}/>Saved investigations</span><span>{runs.length} recent runs</span></summary>{error&&<p className="saved-runs-error">{error}</p>}<div>{runs.slice(0,6).map(r=><div className="saved-run" key={r.id}><div><span className="mono">{r.id.slice(0,16)}</span><small>{r.live?'Live researcher + critic':'Deterministic workflow'} · {new Date(r.updated_at).toLocaleTimeString()}</small></div><span className={'saved-status '+r.status}>{r.status} / {r.phase}</span>{['interrupted','running'].includes(r.status)?<button className="button secondary" disabled={busy} onClick={()=>onResume(r.id)}><RotateCcw size={12}/>Resume <ArrowRight size={12}/></button>:<span className="saved-run-state">{r.resume_count?`${r.resume_count} resumes`:'Recorded'}</span>}</div>)}</div><p className="workflow-footnote">Resume reuses completed stages only while the evidence state is unchanged. Active worker leases prevent duplicate execution; after a crash, a lease may take up to three minutes to expire.</p></details>
+}

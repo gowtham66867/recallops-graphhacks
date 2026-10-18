@@ -1,0 +1,71 @@
+{
+  "measured_at": "2026-10-18T09:51:47Z",
+  "database": "Real FalkorDB v4.16.3, local Docker",
+  "mode": "deterministic applicability engine",
+  "python": "3.12.12",
+  "cases": [
+    {
+      "scenario": "checkout",
+      "expected": "disable_flag",
+      "actual": "disable_flag",
+      "decision_pass": true,
+      "all_evidence_resolves": true,
+      "investigation_ms": 32.79,
+      "execution_status": "succeeded",
+      "persistent_recall_pass": true,
+      "idempotent_execution_pass": true,
+      "conditional_reuse_pass": true
+    },
+    {
+      "scenario": "rollback-valid",
+      "expected": "rollback",
+      "actual": "rollback",
+      "decision_pass": true,
+      "all_evidence_resolves": true,
+      "investigation_ms": 28.86,
+      "execution_status": "succeeded",
+      "persistent_recall_pass": true,
+      "idempotent_execution_pass": true,
+      "conditional_reuse_pass": true
+    },
+    {
+      "scenario": "unknown",
+      "expected": null,
+      "actual": null,
+      "decision_pass": true,
+      "all_evidence_resolves": true,
+      "investigation_ms": 31.1
+    },
+    {
+      "scenario": "pool",
+      "expected": "scale_pool",
+      "actual": "scale_pool",
+      "decision_pass": true,
+      "all_evidence_resolves": true,
+      "investigation_ms": 30.15,
+      "execution_status": "succeeded",
+      "persistent_recall_pass": true,
+      "idempotent_execution_pass": true,
+      "conditional_reuse_pass": true
+    },
+    {
+      "scenario": "dependency",
+      "expected": "disable_flag",
+      "actual": "disable_flag",
+      "decision_pass": true,
+      "all_evidence_resolves": true,
+      "investigation_ms": 30.7,
+      "execution_status": "succeeded",
+      "persistent_recall_pass": true,
+      "idempotent_execution_pass": true,
+      "conditional_reuse_pass": true
+    }
+  ],
+  "live_model_evaluation": "Not run: no project OPENAI_API_KEY configured. Mock adapter contract tests do not establish model quality.",
+  "same_model_baseline": "Not run: requires configured model. No comparative model performance claims.",
+  "limitations": [
+    "Small synthetic scenario suite; not production incident accuracy.",
+    "Local timings include database round trips and evidence validation; not LLM latency.",
+    "Replay is a simulator control, not an organically recurring production incident."
+  ]
+}

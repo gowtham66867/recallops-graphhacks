@@ -1,0 +1,20 @@
+services:
+  proxy:
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      RECALL_HOST: ${RECALL_HOST:?Set the deployment hostname}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./deploy/access.caddy:/etc/caddy/access.caddy:ro
+      - recallops-caddy-data:/data
+      - recallops-caddy-config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+volumes:
+  recallops-caddy-data:
+  recallops-caddy-config:
