@@ -4,7 +4,7 @@ Updated October 18, 2026, using Python 3.12.12, Node 24.18.0, and FalkorDB v4.16
 
 ## Automated checks
 
-- **46 tests passed** against real FalkorDB, plus a mocked Responses API adapter contract test within that suite.
+- **60 tests passed** against real FalkorDB, plus a mocked Responses API adapter contract test within that suite.
 - Production React/TypeScript build passed.
 - Five scenario evaluation cases selected the expected supported action or abstained when evidence was insufficient.
 - All returned decision evidence IDs resolved to actual graph records.
@@ -55,7 +55,7 @@ Narrow layout inspection verified top navigation, scenario selector, stacked lay
 - Typed live-assessment contract tests verified model abstention and correction of an unsupported action within the call budget. These tests mock the API and do not establish actual model performance.
 - Counterfactual forecasts did not mutate facts or create observed lessons.
 
-The original 23-test and browser records above describe the initial build. The expanded suite is 46 tests. Live provider validation remains outstanding.
+The original 23-test and browser records above describe the initial build. The expanded suite is 60 tests. Live provider validation remains outstanding.
 
 The upgraded browser flow also completed a compatible rollback through a verified run, human approval and simulation, changing the deployed version to v2.7.0 and recording recovery. A new provenance test verifies that changed operational state is linked to its new simulator observation source.
 
@@ -63,12 +63,12 @@ Recovery was also verified in the browser: a separate Python process deliberatel
 
 ## Interactive context experiment
 
-The System map runs history ablation on a disposable copy of the current factual graph. Two additional real-database tests verify changed decisions, unchanged source digests, and removal of temporary graphs. The full suite now contains 46 tests.
+The System map runs history ablation on a disposable copy of the current factual graph. Two additional real-database tests verify changed decisions, unchanged source digests, and removal of temporary graphs. The full suite now contains 60 tests.
 
 ## Publication and hosted experiment checks
 
 The public repository's GitHub Actions pipeline passed on a fresh Linux runner:
-46 tests, five architecture cases, two context ablations, and the production
+60 tests, five architecture cases, two context ablations, and the production
 frontend build. The hosted HTTPS workflow passed after the ablation upgrade.
 The hosted context experiment changed restart from contradicted to unknown;
 the source snapshot before and after the experiment was identical.
@@ -80,3 +80,14 @@ live-model path. See DEMO.md for its exact chaptered transcript.
 ## Submission confirmation
 
 WeMakeDevs showed Submitted for GraphHacksChampions, filed October 18, 2026, at 5:36 PM IST. The entry includes both relevant tracks, public source, the Unlisted YouTube demo with English captions, build-story article, and hosted demo access. See SUBMISSION.md.
+
+## Interactive Proof Lab upgrade
+
+The suite now has **60 passing tests**, including 14 new cases covering bounded
+configuration, five custom fault decisions, actual HTTP 409 on stale approval,
+no observed outcome on rejection, scoped graph/reset behavior, preservation of
+main scenarios, and lesson matching versus current execution eligibility.
+Browser checks completed the successful-remediation path, reintroduced the fault,
+observed eligible memory, then injected schema drift and verified invalidation
+with unchanged errors and a retained but ineligible lesson. Configuration commits
+current telemetry atomically; previously recorded outcome sources remained intact.

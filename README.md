@@ -17,6 +17,25 @@ login; local setup below runs the complete workflow without a model key.
 
 [Architecture](docs/ARCHITECTURE.md) · [Central Cypher queries](docs/GRAPH_QUERIES.cypher) · [Measured evaluation](docs/architecture-evaluation.json) · [Verification](docs/VERIFICATION.md) · [Build story](docs/BLOG.md)
 
+## Challenge the system yourself
+
+Open **[Proof lab](https://34.46.171.202.sslip.io/?view=lab)** after signing in:
+
+1. **Build an incident:** choose a fault preset or change the signature, schema,
+   feature flag, pool saturation, and error rate. Inspect the policy immediately.
+2. **Break an approval:** Investigate → Propose → Approve → Inject schema drift →
+   Attempt execution. The actual executor returns HTTP 409, invalidates the
+   proposal, and leaves the incident unchanged.
+3. **Expire a memory:** execute a valid remedy without drift to save a lesson.
+   Reapply its fault to see it become eligible. Change schema v3 to v4 to retain
+   the observation while rejecting its reuse.
+
+Each browser gets a separate synthetic graph. This preserves the five main
+scenarios but is **not authenticated tenant isolation**. These experiments use
+the same verified workflow and executor as Incident command. The suite now has
+**60 passing tests** against real FalkorDB, including API race and isolation checks.
+See the [two-minute judge walkthrough](docs/PROOF_LAB.md).
+
 ## The experiment that makes the graph matter
 
 Open **System map → Run context ablation**. RecallOps copies the current factual

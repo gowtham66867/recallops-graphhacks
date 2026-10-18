@@ -38,7 +38,7 @@ AI coding assistance was used for design, implementation, testing, and documenta
 - Build story: https://github.com/gowtham66867/recallops-graphhacks/blob/main/docs/BLOG.md
 - Graph schema: README.md and docs/ARCHITECTURE.md
 - Exact graph queries: docs/GRAPH_QUERIES.cypher
-- Reproducible verification: 46 tests, five scenario cases, two history ablations; CI passed.
+- Reproducible verification: 60 tests, five scenario cases, two history ablations; CI passed.
 - Tracks: Agent Memory and Coordination; Agents That Act on Connected Data.
 
 ## Submitted

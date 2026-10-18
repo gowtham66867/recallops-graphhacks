@@ -137,3 +137,22 @@ and schema evidence are preserved. A `finally` block deletes the disposable grap
 source-graph mutation and cleanup are covered by real-database tests. A per-scenario
 Redis lease bounds concurrent experiments. The System map exposes this experiment
 without claiming model accuracy improvements.
+
+## Judge-controlled Proof Lab
+
+`/api/lab/{UUID}` routes select a separate named graph using the configured
+prefix plus a browser-local UUID. Inputs are typed and bounded by Pydantic;
+unknown fields and invalid signatures/schemas are rejected. One parameterized
+Cypher update publishes incident, deployment, migration, flag, and current
+telemetry together under the normal mutation lock. Previously observed outcome
+sources remain unchanged.
+
+Lab investigation invokes `run_workflow`; proposals require its verified run ID;
+approval and execution call the normal engine functions. No alternate execution
+policy exists. An actual schema change between approval and execution produces
+HTTP 409 and a stored invalidated proposal. The UI checks the response status,
+retrieved proposal, and unchanged error rate before reporting a passed challenge.
+
+The lesson view reports condition matching separately from execution eligibility.
+Browser-local scoping preserves main scenarios but is not tenant authorization;
+all graphs remain behind the deployment's shared demo login. See PROOF_LAB.md.

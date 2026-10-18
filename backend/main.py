@@ -139,6 +139,37 @@ def evidence(scenario:str,id:str):
     if not node: raise HTTPException(404,'Evidence record not found')
     return node
 
+# Proof Lab uses separate graphs; all action authority stays in the same engine.
+from .lab import Configuration, lab_store, snapshot as lab_snapshot, configure as lab_configure
+
+@app.get('/api/lab/{lab_id}')
+def laboratory(lab_id:UUID):return lab_snapshot(lab_store(lab_id))
+
+@app.post('/api/lab/{lab_id}/configure')
+def configure_laboratory(lab_id:UUID,body:Configuration):return lab_configure(lab_store(lab_id),body)
+
+@app.post('/api/lab/{lab_id}/investigate')
+def investigate_laboratory(lab_id:UUID):
+    return run_workflow(lab_store(lab_id),'Investigate the judge-configured synthetic incident.',False)
+
+@app.post('/api/lab/{lab_id}/proposals')
+def propose_laboratory(lab_id:UUID,body:Proposal):
+    s=lab_store(lab_id);sid=str(body.session_id)
+    s.put({'id':sid,'kind':'Session','title':'Proof Lab session','at':now()})
+    return propose(s,body.action,sid,body.run_id)
+
+@app.post('/api/lab/{lab_id}/proposals/{id}/approve')
+def approve_laboratory(lab_id:UUID,id:str):return approve(lab_store(lab_id),id)
+
+@app.post('/api/lab/{lab_id}/proposals/{id}/execute')
+def execute_laboratory(lab_id:UUID,id:str):return execute(lab_store(lab_id),id)
+
+@app.post('/api/lab/{lab_id}/reset')
+def reset_laboratory(lab_id:UUID):
+    s=lab_store(lab_id)
+    with s.db.connection.lock(s.name+':mutation',timeout=20,blocking_timeout=5):s.reset()
+    return lab_snapshot(s)
+
 DIST=Path(__file__).resolve().parent.parent/'frontend'/'dist'
 if DIST.exists():
     app.mount('/assets',StaticFiles(directory=DIST/'assets'),name='assets')

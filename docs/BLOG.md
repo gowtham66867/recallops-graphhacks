@@ -41,7 +41,7 @@ history is removed, because the present-day incompatibility still exists.
 
 ## Evidence and scope
 
-The public repository contains 46 passing tests, five synthetic scenario
+The public repository contains 60 passing tests, five synthetic scenario
 workflows, two history ablations, the exact Cypher queries, and reproducible setup.
 A GitHub Actions run repeats the tests against actual FalkorDB and builds the
 frontend on a fresh Linux runner. Remediation remains a simulator, and the
