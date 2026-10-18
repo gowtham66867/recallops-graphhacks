@@ -78,3 +78,18 @@ workflow and engine used by Incident command, with separate lab graph state.
 [Try the two-minute challenge](PROOF_LAB.md). The hosted HTTPS checks and 60-test
 suite cover these behaviors. All faults and remediation remain synthetic, and
 browser scoping is not authenticated tenant isolation.
+
+
+## A handoff that preserves evidence boundaries
+
+The final adaptation adds source-linked operator reports alongside simulator
+telemetry. An operator can record prior attempts, corrections and gaps without
+turning their account into verified execution evidence. Reviewed handoffs retain
+that distinction and require separate internal/anonymized approvals tied to the
+current factual digest. Adding context invalidates an earlier export approval.
+
+Voice preferences now survive refresh, and optional Gemini audio is separate
+from the OpenAI investigator. This deployment has no configured Gemini key;
+contract tests are not presented as working live audio. The expanded suite has
+95 passing tests (87 Python, 8 frontend). See FEEDBACK_IMPLEMENTATION.md for the
+full 35-item adaptation, current limitations and a proposed reviewer-led pilot.

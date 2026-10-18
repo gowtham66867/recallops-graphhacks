@@ -46,7 +46,7 @@ Open **[Proof lab](https://34.46.171.202.sslip.io/?view=lab)** after signing in:
 Each browser gets a separate synthetic graph. This preserves the five main
 scenarios but is **not authenticated tenant isolation**. These experiments use
 the same verified workflow and executor as Incident command. The suite now has
-**60 passing tests** against real FalkorDB, including API race and isolation checks.
+**95 passing tests** across Python and frontend checks, including real FalkorDB API races and isolation checks.
 See the [two-minute judge walkthrough](docs/PROOF_LAB.md).
 
 ![Actual Proof Lab rejection and retained memory](docs/assets/proof-lab.png)

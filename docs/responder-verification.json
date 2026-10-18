@@ -1,0 +1,14 @@
+{
+  "verified_at": "2026-10-18T18:20:10.635069+00:00",
+  "https": true,
+  "unapproved_export_http": 409,
+  "anonymized_approved_export_http": 200,
+  "internal_audience_still_requires_approval": true,
+  "main_scenario_preserved": true,
+  "audio_consent_required_http": 403,
+  "gemini_configured": false,
+  "live_audio": "unverified",
+  "python_tests": 87,
+  "frontend_tests": 8,
+  "ci": "passed"
+}
