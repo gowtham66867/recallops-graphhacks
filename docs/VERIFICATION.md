@@ -41,7 +41,7 @@ Narrow layout inspection verified top navigation, scenario selector, stacked lay
 
 - A real provider request was attempted and returned HTTP 429 `credit_balance_exhausted`. No successful live investigation or same-model historical-context comparison has been recorded. The mocked adapter contract test is not a live model evaluation.
 - One dependency deprecation warning from Starlette's test client/AnyIO was emitted; it did not fail tests.
-- A password-protected Google Cloud deployment passed external HTTPS and workflow checks; see DEPLOYMENT.md. Repository publication, a recorded video, blog publication, and hackathon submission remain outstanding.
+- A password-protected Google Cloud deployment passed external HTTPS and workflow checks; see DEPLOYMENT.md. The source repository and build-story article are public, and the narrated demo video has been rendered. YouTube publication and hackathon submission are pending; this record does not claim they have completed.
 - The hosted demo uses shared access credentials. It has no per-user authorization, tenant isolation, external telemetry, or real remediation integration.
 
 
@@ -64,3 +64,15 @@ Recovery was also verified in the browser: a separate Python process deliberatel
 ## Interactive context experiment
 
 The System map runs history ablation on a disposable copy of the current factual graph. Two additional real-database tests verify changed decisions, unchanged source digests, and removal of temporary graphs. The full suite now contains 46 tests.
+
+## Publication and hosted experiment checks
+
+The public repository's GitHub Actions pipeline passed on a fresh Linux runner:
+46 tests, five architecture cases, two context ablations, and the production
+frontend build. The hosted HTTPS workflow passed after the ablation upgrade.
+The hosted context experiment changed restart from contradicted to unknown;
+the source snapshot before and after the experiment was identical.
+
+The prepared recorded walkthrough uses actual UI captures and synthetic
+narration. It explicitly discloses deterministic mode and the unverified optional
+live-model path. See DEMO.md for its exact chaptered transcript.
