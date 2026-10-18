@@ -1,7 +1,7 @@
 # Submission draft
 
 ## Name
-RecallOps — incident response with conditional memory
+RecallOps — Incident memory that knows when a fix expires
 
 ## One-line pitch
 An incident agent that remembers failed fixes, rechecks yesterday’s successful fix against today’s system, and carries observed outcomes into the next session.
@@ -30,13 +30,29 @@ See docs/VERIFICATION.md and docs/evaluation.json for measured results. Do not r
 ## AI assistance
 AI coding assistance was used for design, implementation, testing, and documentation. The human submitter must review the code, rerun the demo, and be prepared to explain the schema, rules, and limitations.
 
-## To complete before submission
-- Review official signed-in submission form fields and current event rules.
-- Configure and test live model access if claiming a live AI demo.
-- Create the public source repository and supply its URL.
-- Record and upload the working demo; add its URL.
-- Deployment complete: https://34.46.171.202.sslip.io (password-protected HTTPS). Provide judges with access through the submission channel; do not publish the password in source code.
-- Review all claims against the final implementation and measured results.
-- Submit through the event panel before the verified deadline.
+## Prepared submission assets
 
-Deployment verification is recorded in docs/DEPLOYMENT.md. No public repository or recorded video URL is available in this workspace. This draft has not been submitted.
+- Public source: https://github.com/gowtham66867/recallops-graphhacks
+- Recorded demo and captions: https://github.com/gowtham66867/recallops-graphhacks/releases/tag/v1.0.0
+- Hosted app: https://34.46.171.202.sslip.io (password protected)
+- Build story: https://github.com/gowtham66867/recallops-graphhacks/blob/main/docs/BLOG.md
+- Graph schema: README.md and docs/ARCHITECTURE.md
+- Exact graph queries: docs/GRAPH_QUERIES.cypher
+- Reproducible verification: 46 tests, five scenario cases, two history ablations; CI passed.
+- Tracks: Agent Memory and Coordination; Agents That Act on Connected Data.
+
+## Remaining publication steps
+
+The signed-in WeMakeDevs form has the project description, tracks, repository,
+deployment, FalkorDB contribution, build-story link, and sponsor feedback filled.
+The required YouTube URL is still empty. The 4:07 prepared video is rendered and
+published as a GitHub release asset. YouTube publication awaits the user's
+at-action approval of the Terms of Service shown in its upload dialog. Sharing
+the demo-only login in the submission also awaits the user's choice.
+
+The available OpenAI project still returns `credit_balance_exhausted`. The entry
+explicitly discloses deterministic mode and does not claim a verified live model.
+
+The deadline checked on the official rules page is October 18, 2026, 11:59 PM IST.
+This document records preparation, not a completed submission. No YouTube URL or
+submission confirmation has been fabricated.

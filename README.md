@@ -8,6 +8,13 @@ RecallOps is an incident command center for Graph Hacks 2026. FalkorDB holds ser
 
 **Tracks:** Agent Memory and Coordination; Agents That Act on Connected Data.
 
+[Watch/download the 4:07 recorded demo](https://github.com/gowtham66867/recallops-graphhacks/releases/tag/v1.0.0) · [Protected live app](https://34.46.171.202.sslip.io)
+
+The video uses actual app captures with synthetic narration. It demonstrates
+**deterministic investigation**, not a validated live-model run. Captions and the
+[full transcript](docs/DEMO.md) are included. The hosted app requires the demo
+login; local setup below runs the complete workflow without a model key.
+
 [Architecture](docs/ARCHITECTURE.md) · [Central Cypher queries](docs/GRAPH_QUERIES.cypher) · [Measured evaluation](docs/architecture-evaluation.json) · [Verification](docs/VERIFICATION.md) · [Build story](docs/BLOG.md)
 
 ## The experiment that makes the graph matter
