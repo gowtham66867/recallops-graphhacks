@@ -8,7 +8,7 @@ RecallOps is an incident command center for Graph Hacks 2026. FalkorDB holds ser
 
 **Tracks:** Agent Memory and Coordination; Agents That Act on Connected Data.
 
-[Architecture](docs/ARCHITECTURE.md) · [Central Cypher queries](docs/GRAPH_QUERIES.cypher) · [Measured evaluation](docs/architecture-evaluation.json) · [Verification](docs/VERIFICATION.md)
+[Architecture](docs/ARCHITECTURE.md) · [Central Cypher queries](docs/GRAPH_QUERIES.cypher) · [Measured evaluation](docs/architecture-evaluation.json) · [Verification](docs/VERIFICATION.md) · [Build story](docs/BLOG.md)
 
 ## The experiment that makes the graph matter
 
