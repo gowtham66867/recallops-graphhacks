@@ -91,3 +91,16 @@ Browser checks completed the successful-remediation path, reintroduced the fault
 observed eligible memory, then injected schema drift and verified invalidation
 with unchanged errors and a retained but ineligible lesson. Configuration commits
 current telemetry atomically; previously recorded outcome sources remained intact.
+
+
+## Feedback adaptation verification
+
+87 Python tests and 8 frontend tests pass (95 total). New tests cover reported
+versus observed evidence, exact masked quotes, corrections, stale audience-specific
+exports, anonymized allowlists, retained-copy redaction, privacy leases, request
+budgets, audio consent/limits, mocked transcript/TTS contracts, persistent voice
+preferences, malformed settings, click/no-speech filtering and thinking pauses.
+The browser verified saving an operator attempt, voice preference after reload,
+reviewing an anonymized payload, approving it and downloading the actual JSON.
+Real Gemini audio, device speaker audibility, and noisy multilingual recordings
+remain unverified. The source register is in FEEDBACK_IMPLEMENTATION.md.

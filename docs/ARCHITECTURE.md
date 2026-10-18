@@ -156,3 +156,31 @@ retrieved proposal, and unchanged error rate before reporting a passed challenge
 The lesson view reports condition matching separately from execution eligibility.
 Browser-local scoping preserves main scenarios but is not tenant authorization;
 all graphs remain behind the deployment's shared demo login. See PROOF_LAB.md.
+
+
+## Operator context, reviewed exports, and shared model budget
+
+OperatorReport → SUPPORTED_BY → Source preserves exact text after common-secret
+masking. Reports and their source records participate in the factual digest;
+corrections retain the earlier source but mark its report superseded. The model
+receives the latest 12 active reports with an explicit omitted count. Reports
+never change telemetry or establish deterministic action eligibility.
+
+ReviewPacket stores both reviewable audience payloads and a factual digest.
+Separate approvals are needed for internal and anonymized exports; the server
+revalidates the digest and approval before each export. Anonymized output uses
+an allowlist of aggregate fields and omits free text, IDs and precise metrics.
+Redaction takes a privacy lease shared with workflows, removes retained saved
+runs/review packets, and masks the selected report/source text. Previously
+downloaded files and provider-side records cannot be recalled.
+
+One ContextVar budget spans researcher and critic: nine total model requests,
+12 researcher tool calls, one assessment repair, a shared 120-second invocation
+budget and per-network-operation timeouts at most 25 seconds with SDK retries
+disabled. It is not a hard process-kill deadline. Each resume starts a fresh
+invocation budget. The UI shows limits and actual model request count.
+
+Optional Gemini audio uses separate credentials, explicit consent, a serialized
+provider lease, bounded input and provider timeouts. It has no execution tools.
+No audio is persisted by this app. These adapters are contract-tested, not live
+validated. See FEEDBACK_IMPLEMENTATION.md for limits and production prerequisites.

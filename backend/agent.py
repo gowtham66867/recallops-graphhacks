@@ -10,6 +10,7 @@ from typing import Literal
 from openai import OpenAI
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from .engine import investigate, context, check_actions
+from .budget import ACTIVE, Budget
 
 TOOL_NAMES = {
     'get_current_incident':'Read current incident, deployed version and schema evidence.',
@@ -36,7 +37,11 @@ def tool_value(store,name):
     if name=='get_current_incident':
         i,d,m=context(store)
         sources={s['id']:s for id in ['current','deploy-current'] for s in store.sources_for(id)}
-        return {'incident':i,'deployment':d,'migration':m,'sources':list(sources.values())}
+        from .handoff import reports
+        active_notes=[n for n in reports(store) if n['active']]
+        notes=active_notes[-12:]
+        sources.update({n['source_id']:store.get(n['source_id']) for n in notes})
+        return {'incident':i,'deployment':d,'migration':m,'sources':list(sources.values()),'operator_reports':notes,'report_context':{'selected':len(notes),'omitted_active':max(0,len(active_notes)-len(notes)),'selection':'Latest 12 active reports; the reviewed handoff retains the complete timeline.'},'report_trust':'Operator statements are unverified reports, never independently observed telemetry or execution evidence.'}
     if name=='inspect_service_dependencies': return store.dependencies()
     if name=='find_related_incidents': return store.history()
     if name=='check_action_preconditions': return check_actions(store)
@@ -60,7 +65,8 @@ def source_ids(value):
 
 
 def run(store,question,live=False,client=None,briefing=None):
-    start=time.perf_counter();traces=[];assessment=None;usage={'input_tokens':0,'output_tokens':0,'requests':0}
+    budget=ACTIVE.get() or Budget()
+    start=time.perf_counter();traces=[];assessment=None;repairs=0;usage={'input_tokens':0,'output_tokens':0,'requests':0}
     if live:
         if not os.getenv('OPENAI_API_KEY') and client is None:
             raise ValueError('Set OPENAI_API_KEY in .env to enable the live agent. Deterministic graph investigation is available now.')
@@ -72,7 +78,7 @@ def run(store,question,live=False,client=None,briefing=None):
         for turn in range(8):
             if time.perf_counter()-start > 90:
                 raise ValueError('Investigation reached its 90-second time budget.')
-            response=client.responses.create(model=os.getenv('OPENAI_MODEL','gpt-4.1-mini'),instructions=INSTRUCTIONS,input=inputs,tools=TOOLS,store=False,max_output_tokens=1600,parallel_tool_calls=False)
+            response=budget.request(client).responses.create(model=os.getenv('OPENAI_MODEL','gpt-4.1-mini'),instructions=INSTRUCTIONS,input=inputs,tools=TOOLS,store=False,max_output_tokens=1600,parallel_tool_calls=False)
             usage['requests']+=1
             u=getattr(response,'usage',None)
             if u:
@@ -98,8 +104,11 @@ def run(store,question,live=False,client=None,briefing=None):
                         checks={c['action']:c for c in check_actions(store)}
                         if candidate.recommended_action is not None and checks[candidate.recommended_action]['status']!='supported':
                             raise ValueError('Selected action is not supported by the current deterministic preconditions. Choose a supported action or abstain.')
-                        if candidate.recommended_action is not None and not set(candidate.source_ids).issubset(set(checks[candidate.recommended_action]['evidence'])):
-                            raise ValueError('Citations must belong to the selected action’s evidence path.')
+                        if candidate.recommended_action is not None:
+                            action_sources=set(checks[candidate.recommended_action]['evidence'])
+                            report_sources={id for id in retrieved_sources if store.get(id).get('classification')=='operator_report'}
+                            if not set(candidate.source_ids).issubset(action_sources|report_sources) or not set(candidate.source_ids)&action_sources:
+                                raise ValueError('An action needs its own operational source path; operator reports cannot establish eligibility.')
                         assessment=candidate
                         text=candidate.explanation+' '+ ' '.join('['+id+']' for id in dict.fromkeys(candidate.source_ids))
                         output={'accepted_for_review':True,'execution_authorized':False}
@@ -111,6 +120,8 @@ def run(store,question,live=False,client=None,briefing=None):
                         traces.append({'tool':item.name,'description':TOOL_NAMES[item.name],'ms':round((time.perf_counter()-t)*1000,1),'records':len(output) if isinstance(output,list) else 1})
                 except (ValueError,ValidationError) as exc:
                     # Return actionable contract errors to the agent, within the same budget.
+                    repairs+=1
+                    if repairs>1:raise ValueError('Shared assessment repair budget exhausted. No action was proposed.') from None
                     output={'error':str(exc)[:800],'execution_authorized':False}
                 inputs.append({'type':'function_call_output','call_id':item.call_id,'output':json.dumps(output)})
                 if assessment is not None:break
@@ -124,4 +135,4 @@ def run(store,question,live=False,client=None,briefing=None):
     result=investigate(store)
     if assessment is not None:
         result['recommendation']=next((c for c in result['checks'] if c['action']==assessment.recommended_action),None)
-    return {**result,'summary':text,'mode':'live' if live else 'deterministic','assessment':assessment.model_dump() if assessment else None,'trace':traces,'model_usage':usage,'elapsed_ms':round((time.perf_counter()-start)*1000,1)}
+    return {**result,'summary':text,'mode':'live' if live else 'deterministic','assessment':assessment.model_dump() if assessment else None,'trace':traces,'model_usage':usage,'repairs_used':repairs,'elapsed_ms':round((time.perf_counter()-start)*1000,1)}

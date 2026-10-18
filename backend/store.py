@@ -79,14 +79,14 @@ class Store:
             self.put({'id':'initialized','kind':'Metadata','title':'Seed complete','at':now()})
 
     def snapshot(self):
-        rows = self.query('MATCH (n:Entity) WHERE NOT n.kind IN $hidden RETURN n.data LIMIT 200', {'hidden':['Metadata','Session','InvestigationRun','Checkpoint']})
+        rows = self.query('MATCH (n:Entity) WHERE NOT n.kind IN $hidden RETURN n.data LIMIT 200', {'hidden':['Metadata','Session','InvestigationRun','Checkpoint','ReviewPacket']})
         nodes = [json.loads(row[0]) for row in rows]
         edges = [{'source':a,'target':b,'label':r} for a,r,b in self.query('MATCH (a:Entity)-[r]->(b:Entity) RETURN a.id,type(r),b.id LIMIT 400')]
         return {'nodes':nodes,'edges':edges}
 
     def fact_snapshot(self):
         """A bounded factual view, unaffected by appended investigation checkpoints."""
-        kinds=['Service','Incident','Deployment','Migration','FeatureFlag','ActionAttempt','Outcome','Source','Lesson']
+        kinds=['Service','Incident','Deployment','Migration','FeatureFlag','ActionAttempt','Outcome','Source','Lesson','OperatorReport']
         nodes=[json.loads(r[0]) for r in self.query('MATCH (n:Entity) WHERE n.kind IN $kinds RETURN n.data LIMIT 501', {'kinds':kinds})]
         if len(nodes)>500:
             raise ValueError('Evidence budget exceeded. Archive old incidents before investigating.')

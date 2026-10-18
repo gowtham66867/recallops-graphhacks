@@ -11,6 +11,9 @@ services:
       FALKORDB_HOST: graph
       FALKORDB_PORT: "6379"
       FALKORDB_GRAPH: recallops
+      GEMINI_API_KEY: ${RECALLOPS_GEMINI_API_KEY:-}
+      GEMINI_TRANSCRIBE_MODEL: ${GEMINI_TRANSCRIBE_MODEL:-gemini-3.8-flash}
+      GEMINI_SPEECH_MODEL: ${GEMINI_SPEECH_MODEL:-gemini-3.8-flash-lite-tts}
       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1-mini}
       # Empty by default. Supply a funded, rotated key through the host environment.
       OPENAI_API_KEY: ${RECALLOPS_OPENAI_API_KEY:-}

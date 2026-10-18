@@ -17,6 +17,19 @@ login; local setup below runs the complete workflow without a model key.
 
 [Architecture](docs/ARCHITECTURE.md) · [Central Cypher queries](docs/GRAPH_QUERIES.cypher) · [Measured evaluation](docs/architecture-evaluation.json) · [Verification](docs/VERIFICATION.md) · [Build story](docs/BLOG.md)
 
+## Preserve responder context and review the handoff
+
+[Responder context](https://34.46.171.202.sslip.io/?view=handoff) adds source-linked
+operator observations, prior attempts, corrections, explicit gaps, and reviewed
+internal/anonymized JSON exports. Reports stay unverified and cannot override
+execution policy. Approvals bind an audience to the current factual fingerprint.
+Voice preferences survive refresh; optional Gemini audio requires a separate key
+and consent. Live audio remains unverified. Procedural prompts support English,
+Hindi, Kannada and Hinglish; operational summaries remain English.
+
+[35-item adaptation and limits](docs/FEEDBACK_IMPLEMENTATION.md) · 87 Python tests
+and 8 frontend tests pass (95 total). The original core video predates this upgrade.
+
 ## Challenge the system yourself
 
 Open **[Proof lab](https://34.46.171.202.sslip.io/?view=lab)** after signing in:

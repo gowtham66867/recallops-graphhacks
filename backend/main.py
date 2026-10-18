@@ -3,7 +3,7 @@ from pathlib import Path
 from contextlib import asynccontextmanager
 from uuid import UUID, uuid4
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse, FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from redis.exceptions import RedisError,LockError
@@ -138,6 +138,60 @@ def evidence(scenario:str,id:str):
     node=store_for(scenario).get(id)
     if not node: raise HTTPException(404,'Evidence record not found')
     return node
+
+from .voice import transcribe, speak, MAX_AUDIO
+from starlette.concurrency import run_in_threadpool
+
+class SpeechInput(BaseModel):
+    text:str=Field(min_length=1,max_length=2000)
+    consent:bool=False
+
+@app.get('/api/voice/status')
+def voice_status():return {'gemini_available':bool(os.getenv('GEMINI_API_KEY')),'device_voice':True,'raw_audio_saved':False,'live_validation':'unverified'}
+
+@app.post('/api/voice/transcribe')
+async def voice_transcription(request:Request,language:str='en-IN'):
+    if request.headers.get('x-audio-consent')!='true':raise HTTPException(403,'Explicit audio-provider consent is required.')
+    audio=bytearray()
+    async for chunk in request.stream():
+        audio.extend(chunk)
+        if len(audio)>MAX_AUDIO:raise HTTPException(413,'Recording exceeds 4 MiB.')
+    mime=request.headers.get('content-type','').split(';')[0]
+    def work():
+        s=Store()
+        with s.db.connection.lock(s.name+':voice',timeout=50,blocking_timeout=.1):return transcribe(bytes(audio),mime,language)
+    return await run_in_threadpool(work)
+
+@app.post('/api/voice/speak')
+def voice_speech(body:SpeechInput):
+    if not body.consent:raise HTTPException(403,'Explicit audio-provider consent is required.')
+    s=Store()
+    with s.db.connection.lock(s.name+':voice',timeout=50,blocking_timeout=.1):return Response(speak(body.text),media_type='audio/wav',headers={'Cache-Control':'no-store'})
+
+from .handoff import ReportInput, Audience, reports, add_report, redact_report, create_packet, approve_packet, export_packet
+
+class AudienceInput(BaseModel):
+    audience:Audience
+
+@app.get('/api/{scenario}/reports')
+def operator_reports(scenario:str):return reports(store_for(scenario))
+
+@app.post('/api/{scenario}/reports')
+def operator_report(scenario:str,body:ReportInput):
+    try:return add_report(store_for(scenario),body)
+    except ValueError as e:raise HTTPException(422,str(e))
+
+@app.post('/api/{scenario}/reports/{id}/redact')
+def operator_redaction(scenario:str,id:str):return redact_report(store_for(scenario),id)
+
+@app.post('/api/{scenario}/handoff')
+def handoff(scenario:str):return create_packet(store_for(scenario))
+
+@app.post('/api/{scenario}/handoff/{id}/approve')
+def approve_handoff(scenario:str,id:str,body:AudienceInput):return approve_packet(store_for(scenario),id,body.audience)
+
+@app.post('/api/{scenario}/handoff/{id}/export')
+def export_handoff(scenario:str,id:str,body:AudienceInput):return export_packet(store_for(scenario),id,body.audience)
 
 # Proof Lab uses separate graphs; all action authority stays in the same engine.
 from .lab import Configuration, lab_store, snapshot as lab_snapshot, configure as lab_configure
